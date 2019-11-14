@@ -1,0 +1,16 @@
+baseURL = "https://infobesity.netlify.com"
+languageCode = "en-us"
+title = "Infobesity"
+theme = "ananke"
+[[menu.main]]
+    name = "Homepage"
+    weight = 1
+    url = "/"
+[[menu.main]]
+    name = "Posts"
+    weight = 2
+    url = "/posts/"
+[[menu.main]]
+    name = "About Me"
+    weight = 3
+    url = "/about/"
