@@ -5,7 +5,6 @@ featured_image: '/posts/bethnal_green_tube_planner/bethnal_green_cover.jpg'
 author: "James"
 summary: "Obtaining a live feed of trains arriving at Bethnal Green underground from TfLs APIs"
 tags: ["Javascript", "API"]
-draft: true
 ---
 
 ## Planning a journey from Bethnal Green

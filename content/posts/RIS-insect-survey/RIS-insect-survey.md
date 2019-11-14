@@ -5,7 +5,6 @@ featured_image: '/posts/RIS-insect-survey/RIS-cover.jpeg'
 author: "James"
 summary: "Using R to scrape data from HTML tables"
 tags: ["Web Scraping", "R"]
-draft: false
 ---
 
 Introduction to Rothamsted's Insect Survey

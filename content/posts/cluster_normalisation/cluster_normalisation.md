@@ -5,7 +5,6 @@ featured_image: '/posts/cluster_normalisation/the-murmuration.jpg'
 author: "James"
 summary: "How and why to normalise data before clustering"
 tags: ["R"]
-draft: true
 ---
 
 Introduction
