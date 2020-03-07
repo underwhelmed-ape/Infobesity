@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Web Scraping on Infobesity</title>
+    <link>https://infobesity.netlify.com/tags/web-scraping/</link>
+    <description>Recent content in Web Scraping on Infobesity</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 01 Sep 2017 01:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://infobesity.netlify.com/tags/web-scraping/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Web scraping online insect survey</title>
+      <link>https://infobesity.netlify.com/posts/ris-insect-survey/ris-insect-survey/</link>
+      <pubDate>Fri, 01 Sep 2017 01:00:00 +0000</pubDate>
+      
+      <guid>https://infobesity.netlify.com/posts/ris-insect-survey/ris-insect-survey/</guid>
+      <description>Using R to scrape data from HTML tables</description>
+    </item>
+    
+  </channel>
+</rss>

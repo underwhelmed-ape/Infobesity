@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Monte-Carlo on Infobesity</title>
+    <link>https://infobesity.netlify.com/tags/monte-carlo/</link>
+    <description>Recent content in Monte-Carlo on Infobesity</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 28 Jan 2019 01:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://infobesity.netlify.com/tags/monte-carlo/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Monopoly</title>
+      <link>https://infobesity.netlify.com/posts/monopoly_simulator/monopoly/</link>
+      <pubDate>Mon, 28 Jan 2019 01:00:00 +0000</pubDate>
+      
+      <guid>https://infobesity.netlify.com/posts/monopoly_simulator/monopoly/</guid>
+      <description>Just how good is Park Lane?</description>
+    </item>
+    
+  </channel>
+</rss>

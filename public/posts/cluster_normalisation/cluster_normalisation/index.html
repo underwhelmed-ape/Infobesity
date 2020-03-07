@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Infobesity  | Feature scaling for clustering</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.62.2" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/dist/css/app.e08a958ae3e530145318b6373195c765.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+
+    <meta property="og:title" content="Feature scaling for clustering" />
+<meta property="og:description" content="How and why to normalise data before clustering" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://infobesity.netlify.com/posts/cluster_normalisation/cluster_normalisation/" />
+<meta property="article:published_time" content="2017-11-28T01:00:00+00:00" />
+<meta property="article:modified_time" content="2017-11-28T01:00:00+00:00" />
+<meta itemprop="name" content="Feature scaling for clustering">
+<meta itemprop="description" content="How and why to normalise data before clustering">
+<meta itemprop="datePublished" content="2017-11-28T01:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2017-11-28T01:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1206">
+
+
+
+<meta itemprop="keywords" content="R," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Feature scaling for clustering"/>
+<meta name="twitter:description" content="How and why to normalise data before clustering"/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  
+  
+  <header class="cover bg-top" style="background-image: url('https://infobesity.netlify.com/posts/cluster_normalisation/the-murmuration.jpg');">
+    <div class="pb3-m pb6-l bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="https://infobesity.netlify.com" class="f3 fw2 hover-white no-underline white-90 dib">
+      Infobesity
+    </a>
+    <div class="flex-l items-center">
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/" title="Homepage page">
+              Homepage
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/posts/" title="Posts page">
+              Posts
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/about/" title="About Me page">
+              About Me
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        <h1 class="f2 f1-l fw2 white-90 mb0 lh-title">Feature scaling for clustering</h1>
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  <article class="flex-l flex-wrap justify-between mw8 center ph3 ph0-l">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        POSTS
+      </p>
+      <h1 class="f1 athelas mb1">Feature scaling for clustering</h1>
+      
+      <time class="f6 mv4 dib tracked" datetime="2017-11-28T01:00:00Z">November 28, 2017</time>
+    </header>
+
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h1 id="introduction">Introduction</h1>
+<p>This is a demonstration of the importance of normalising (also known as
+standardising) data with distance based clustering techniques like
+K-means. I was motivated by an answer in the Statistics StackExchange
+community and have translated this from Python into R:
+<a href="https://stats.stackexchange.com/questions/89809/is-it-important-to-scale-data-before-clustering">Cross-Validated</a>
+translated into R.</p>
+<p>There are several types of &lsquo;cluster models&rsquo;, each of which contain
+several algorithms. These include Centroid, Hierarchical, distribution
+and density based models. This post will focus on the most common
+algorithm: K-means, the architypal centroid-model based algorithm.</p>
+<p>For K-means, as a centroid based cluster model, each cluster is
+represented by a single central mean vector (x,y) that minimises the sum
+of squared residuals. As this seeks to minimise the Euclidian distance,
+there are a number of assumptions that result from this:</p>
+<ol>
+<li>
+<p>Spherical Clusters</p>
+<ul>
+<li>Clusters must be separable such that the mean value (centroid)
+converges to the centre</li>
+<li>Clusters cannot be nested</li>
+</ul>
+</li>
+<li>
+<p>Similar scales</p>
+<ul>
+<li>Clusters have similar variance</li>
+</ul>
+</li>
+<li>
+<p>Similar sized clusters</p>
+<ul>
+<li>Unbalanced sizes of clusters gives greater weighting to the
+larger clusters</li>
+</ul>
+</li>
+</ol>
+<p>The Euclidean distance is used here as I have continuous numerical
+variables. In this example the two sets of data will on different scales
+and will thus differ in their variances.</p>
+<h2 id="packages">Packages</h2>
+<pre><code>library(dplyr) # Data Manipulation
+library(ggplot2) # Data Visualisation
+library(ggExtra) # Adding marginal plots to ggplots
+</code></pre>
+<h1 id="simulating-the-data">Simulating the Data</h1>
+<pre><code># Data along variable X to have single distribution with large range
+x &lt;- rnorm(1000) * 10 + 50
+
+# Data along Y to have two distributions with a smaller range
+y &lt;- c(rnorm(500) + 10, rnorm(500) + 15)
+
+# Binding the data together into a dataframe
+df &lt;- as.data.frame(cbind(x,y))
+head(df)
+
+##          x         y
+## 1 62.04969  9.818573
+## 2 46.94655 10.573686
+## 3 63.55241 10.463015
+## 4 45.10800  9.276210
+## 5 27.84014  8.870390
+## 6 33.45776 11.068927
+</code></pre>
+<p>In this bi-variate example, the data along the x-axis is drawn from a
+normal distribution and has a single modal value.</p>
+<p>A bi-modal distribution was created on the y-axis; the data for each of
+these distributions were drawn from different normal distributions,
+creating a separation between clusters.</p>
+<p>The range of the X-variable is larger than the range of Y.</p>
+<pre><code>ggExtra::ggMarginal(
+    ggplot(df, aes(x = x, y = y)) +
+        geom_point() + theme_bw(),
+type = &quot;histogram&quot;, fill = &quot;lightgrey&quot;
+)
+</code></pre>
+<p><img src="/posts/cluster_normalisation/images/original_data.png" alt="original data"></p>
+<h1 id="data-analysis-and-results">Data Analysis and Results</h1>
+<h2 id="k-means-on-un-scaled-data">K-means on un-scaled data</h2>
+<pre><code># Perform K-means Clustering
+km &lt;- kmeans(df, #features to be included in cluster model
+             2, # number of clusters
+             nstart = 20 # number of repeats
+             )
+
+#Create Dataframe of centroid locations
+centroids &lt;- data.frame(Centroid = factor(seq(1:2)),
+                        x = km$centers[,1],
+                        y = km$centers[,2])
+
+# Plot clusters on data with centroids
+ggplot(df, aes(x = x, y = y)) +
+    geom_point(aes(color = as.factor(km$cluster)), alpha = 0.5, pch = 19) +
+    geom_point(data = centroids, aes(x = x, y = y, colour = Centroid), cex = 5, pch = 19) +
+    guides(color = FALSE) + # remove legend
+    theme_bw()
+</code></pre>
+<p><img src="/posts/cluster_normalisation/images/unscaled_clustering.png" alt="unscaled clustering"></p>
+<p>The algorithm has not clustered the data as we might have expected.
+R-plots default to maximising the screen space and will distort each
+axis for a better visualisation, and with the plot in this format it can
+be difficult to see why the clusters have formed around these centroids.</p>
+<pre><code>ggplot(df, aes(x = x, y = y)) +
+    geom_point(aes(color = as.factor(km$cluster)), pch = 19, alpha = 0.5) +
+    geom_point(data = centroids, aes(x = x, y = y, colour = Centroid), cex = 5, pch = 19) +
+    guides(color = FALSE) + # remove legend
+    coord_fixed() + # maintain correct aspect ratio (assuming change in x is same as change in y)
+    theme_bw()
+</code></pre>
+<p><img src="/posts/cluster_normalisation/images/unscaled_aspect.png" alt="unscaled clustering"></p>
+<p>This plot now maintains the aspect ratio, creating representative
+distances between points.</p>
+<p>K means iteratively optimises the clusters by minimising the Sum of
+Squared Errors (SSE), i.e. the distances between the centroids and the
+data points, similar to linear regression.</p>
+<p>This assumes that the variance of each of the variables are the same.
+With the large difference in the scales of each feature, this is not the
+case:</p>
+<pre><code>df %&gt;%
+    summarise(range_x = max(x) - min(x),
+              range_y = max(y) - min(y),
+              var_x = var(x),
+              var_y = var(y)) %&gt;%
+    round(., 2) # round to 2 d.p.
+
+##   range_x range_y var_x var_y
+## 1   60.03   10.75 94.46  6.96
+</code></pre>
+<p>The data in this case are on different scales and thus more weighting is
+given to the feature with the largest range.</p>
+<h2 id="feature-normalisation">Feature normalisation</h2>
+<p>Normilisation eliminates the problem of different scales by bringing all
+values between 0 and 1. There are various ways to scale data, here I
+have used Unity based normalisation.</p>
+<p><img src="https://latex.codecogs.com/gif.latex?x%5Cprime%20%3D%20%5Cfrac%7Bx%20-%20min%28x%29%7D%7Bmax%28x%29%20-%20min%28x%29%7D" alt="Unity-based normilisation equation"></p>
+<p>Where: <em>x</em> = data vector and <em>x</em>′ = normalised x</p>
+<pre><code># Create Feature Scaling function that takes a numeric vector.
+scaling &lt;- function(x){
+    (x - min(x)) / (max(x) - min(x))
+}
+
+# new dataframe with scaled values
+df %&gt;%
+    dplyr::mutate(x_scaled = scaling(df$x),
+                  y_scaled = scaling(df$y)) %&gt;%
+    dplyr::select(x_scaled, y_scaled) -&gt; df_scaled
+
+head(df_scaled)
+
+##    x_scaled  y_scaled
+## 1 0.7101954 0.2747678
+## 2 0.4585957 0.3449835
+## 3 0.7352288 0.3346926
+## 4 0.4279676 0.2243350
+## 5 0.1403063 0.1865991
+## 6 0.2338890 0.3910346
+
+ggplot(data = df_scaled,
+       mapping = aes(x = x_scaled, y = y_scaled)
+       ) +
+    geom_point() +
+    theme_bw()
+</code></pre>
+<p><img src="/posts/cluster_normalisation/images/normalised_data.png" alt="normalised data"></p>
+<h2 id="k-means-on-scaled-data">K-means on Scaled Data</h2>
+<p>Now both features are on comparable scales, on which the Euclidean
+distance can be measured to create a new K-means clustering model.</p>
+<p>Results are plotted on the original scales for interpretability.</p>
+<p>One issue with an iterative process such as k-means, is that the choice
+of the initial starting point can influence the assignment of points to
+clusters. The process is guaranteed to only find local optimums. This
+can be accounted for by repeating the clustering mutiple times with
+different randomly set initilisation values and choosing the result with
+the lowest error rate. This is done using the <code>nstart = n</code> argument in
+<code>kmeans()</code> function.</p>
+<pre><code># run k-means on scaled data
+km_scaled &lt;- kmeans(df_scaled, 2, nstart = 20)
+
+# create an unscale function to return values back to original scale
+unscale &lt;- function(x,y){
+    x * ((max(y) - min(y))) + min(y)
+}
+
+centroids &lt;- data.frame(Centroid = factor(seq(1:2)),
+                        x = unscale(km_scaled$centers[,1], df$x),
+                        y = unscale(km_scaled$centers[,2], df$y))
+
+ggplot(df, aes(x = x, y = y)) +
+    geom_point(alpha = 0.5, pch = 19, aes(color = as.factor(km_scaled$cluster))) +
+    geom_point(data = centroids, aes(x = x, y = y, colour = Centroid), cex = 5, pch = 19) +
+    guides(color = FALSE) + # remove legend
+    theme_bw()
+</code></pre>
+<p><img src="/posts/cluster_normalisation/images/normalised_clustering.png" alt="normalised clustering"></p>
+<p>The impact of feature scaling can be seen. this now satisfies the
+assumptions of the Ordinary Least Squares, that minimises the sum of
+squared errors, resulting in a more intuitive clustering.</p>
+<h1 id="session-information">Session Information</h1>
+<pre><code>sessionInfo()
+
+## R version 3.4.2 (2017-09-28)
+## Platform: x86_64-w64-mingw32/x64 (64-bit)
+## Running under: Windows 10 x64 (build 16299)
+##
+## Matrix products: default
+##
+## locale:
+## [1] LC_COLLATE=English_United Kingdom.1252
+## [2] LC_CTYPE=English_United Kingdom.1252   
+## [3] LC_MONETARY=English_United Kingdom.1252
+## [4] LC_NUMERIC=C                           
+## [5] LC_TIME=English_United Kingdom.1252    
+##
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+##
+## other attached packages:
+## [1] bindrcpp_0.2       ggExtra_0.7        ggplot2_2.2.1.9000
+## [4] dplyr_0.7.4       
+##
+## loaded via a namespace (and not attached):
+##  [1] Rcpp_0.12.14     knitr_1.17       bindr_0.1        magrittr_1.5    
+##  [5] munsell_0.4.3    xtable_1.8-2     colorspace_1.3-2 R6_2.2.2        
+##  [9] rlang_0.1.4      plyr_1.8.4       stringr_1.2.0    tools_3.4.2     
+## [13] grid_3.4.2       gtable_0.2.0     miniUI_0.1.1     htmltools_0.3.6
+## [17] lazyeval_0.2.1   yaml_2.1.14      assertthat_0.2.0 rprojroot_1.2   
+## [21] digest_0.6.12    tibble_1.3.4     shiny_1.0.5      mime_0.5        
+## [25] glue_1.2.0       evaluate_0.10.1  rmarkdown_1.8    labeling_0.3    
+## [29] stringi_1.1.6    compiler_3.4.2   scales_0.5.0     backports_1.1.1
+## [33] httpuv_1.3.5     pkgconfig_2.0.1</code></pre>
+<ul class="pa0">
+  
+   <li class="list">
+     <a href="/tags/r" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">R</a>
+   </li>
+  
+</ul>
+<div class="mt6">
+        
+      </div>
+    </main>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">Related</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/posts/ris-insect-survey/ris-insect-survey/">Web scraping online insect survey</a>
+        </li>
+	    
+    </ul>
+</div>
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-near-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://infobesity.netlify.com" >
+    &copy; 2020 Infobesity
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>

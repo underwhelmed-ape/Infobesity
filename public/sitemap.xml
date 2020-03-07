@@ -3,19 +3,76 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://example.org/about/</loc>
+    <loc>https://infobesity.netlify.com/</loc>
+    <lastmod>2019-01-28T01:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/categories/</loc>
+    <loc>https://infobesity.netlify.com/posts/monopoly_simulator/monopoly/</loc>
+    <lastmod>2019-01-28T01:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/</loc>
+    <loc>https://infobesity.netlify.com/tags/monte-carlo/</loc>
+    <lastmod>2019-01-28T01:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/tags/</loc>
+    <loc>https://infobesity.netlify.com/posts/</loc>
+    <lastmod>2019-01-28T01:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infobesity.netlify.com/tags/python/</loc>
+    <lastmod>2019-01-28T01:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infobesity.netlify.com/tags/</loc>
+    <lastmod>2019-01-28T01:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infobesity.netlify.com/posts/cluster_normalisation/cluster_normalisation/</loc>
+    <lastmod>2017-11-28T01:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infobesity.netlify.com/tags/r/</loc>
+    <lastmod>2017-11-28T01:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infobesity.netlify.com/tags/api/</loc>
+    <lastmod>2017-10-10T01:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infobesity.netlify.com/posts/bethnal_green_tube_planner/bethnal_green/</loc>
+    <lastmod>2017-10-10T01:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infobesity.netlify.com/tags/javascript/</loc>
+    <lastmod>2017-10-10T01:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infobesity.netlify.com/tags/web-scraping/</loc>
+    <lastmod>2017-09-01T01:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infobesity.netlify.com/posts/ris-insect-survey/ris-insect-survey/</loc>
+    <lastmod>2017-09-01T01:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infobesity.netlify.com/about/</loc>
+  </url>
+  
+  <url>
+    <loc>https://infobesity.netlify.com/categories/</loc>
   </url>
   
 </urlset>

@@ -2,13 +2,68 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Infobesity</title>
-    <link>http://example.org/tags/</link>
+    <link>https://infobesity.netlify.com/tags/</link>
     <description>Recent content in Tags on Infobesity</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Mon, 28 Jan 2019 01:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://example.org/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://infobesity.netlify.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Monte-Carlo</title>
+      <link>https://infobesity.netlify.com/tags/monte-carlo/</link>
+      <pubDate>Mon, 28 Jan 2019 01:00:00 +0000</pubDate>
+      
+      <guid>https://infobesity.netlify.com/tags/monte-carlo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://infobesity.netlify.com/tags/python/</link>
+      <pubDate>Mon, 28 Jan 2019 01:00:00 +0000</pubDate>
+      
+      <guid>https://infobesity.netlify.com/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R</title>
+      <link>https://infobesity.netlify.com/tags/r/</link>
+      <pubDate>Tue, 28 Nov 2017 01:00:00 +0000</pubDate>
+      
+      <guid>https://infobesity.netlify.com/tags/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>API</title>
+      <link>https://infobesity.netlify.com/tags/api/</link>
+      <pubDate>Tue, 10 Oct 2017 01:00:00 +0000</pubDate>
+      
+      <guid>https://infobesity.netlify.com/tags/api/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Javascript</title>
+      <link>https://infobesity.netlify.com/tags/javascript/</link>
+      <pubDate>Tue, 10 Oct 2017 01:00:00 +0000</pubDate>
+      
+      <guid>https://infobesity.netlify.com/tags/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web Scraping</title>
+      <link>https://infobesity.netlify.com/tags/web-scraping/</link>
+      <pubDate>Fri, 01 Sep 2017 01:00:00 +0000</pubDate>
+      
+      <guid>https://infobesity.netlify.com/tags/web-scraping/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>
