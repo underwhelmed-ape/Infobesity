@@ -1,11 +1,14 @@
 ---
-title: "Monopoly"
+title: "Monopoly Simulation"
 date: 2020-03-07T01:00:00Z
 featured_image: '/posts/monopoly_simulator/monopoly_cover.jpg'
 author: "James"
-summary: "Just how good is Park Lane?"
+summary: ""
 tags: ["Python", "Monte-Carlo"]
 ---
+
+Just how good is Park Lane?
+<!--more-->
 
 Christmas is close and it's time to get the Monopoly out.
 
