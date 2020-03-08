@@ -24,6 +24,5 @@ At Agrimetrics we bring together and link disparate datasets and serve them thro
 * Statistical advisory to clients
     * Helping to improve understanding and inferences from data
 
-# Key Skills
 
 
