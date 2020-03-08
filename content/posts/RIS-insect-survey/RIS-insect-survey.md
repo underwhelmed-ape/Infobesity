@@ -3,9 +3,12 @@ title: "Web scraping online insect survey"
 date: 2017-09-01T01:00:00Z
 featured_image: '/posts/RIS-insect-survey/RIS-cover.jpeg'
 author: "James"
-summary: "Using R to scrape data from HTML tables"
+summary: ""
 tags: ["Web Scraping", "R"]
 ---
+
+Using R to scrape data from Rothamsted Institute's insect survey.
+<!--more-->
 
 Introduction to Rothamsted's Insect Survey
 ---------------------------------

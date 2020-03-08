@@ -3,9 +3,12 @@ title: "Feature scaling for clustering"
 date: 2017-11-28T01:00:00Z
 featured_image: '/posts/cluster_normalisation/the-murmuration.jpg'
 author: "James"
-summary: "How and why to normalise data before clustering"
+summary: ""
 tags: ["R"]
 ---
+
+Why is normalising data important in clustering?
+<!--more-->
 
 Introduction
 ============
