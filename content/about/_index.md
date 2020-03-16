@@ -3,6 +3,10 @@
 title: "About Me"
 
 ---
+> > Problems that go unmeasured often go unsolved - [UNICEF](https://www.unicef.org/statistics/index_24287.html)
+
+
+- - - 
 
 <img src="/images/me.png" alt="Me" style="width:200px;height:200px;" class="center">
 
